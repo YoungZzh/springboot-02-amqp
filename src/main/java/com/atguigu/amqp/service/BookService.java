@@ -5,6 +5,8 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 /**
  * Author:Young
  * Date:2020/7/18-22:10
@@ -17,10 +19,12 @@ public class BookService {
         System.out.println("收到消息：" + book);
     }
 
-    @RabbitListener(queues = "atguigu.news")
+    @RabbitListener(queues = "boot_queue")
     public void receiveBook02(Message message){
-        System.out.println(message.getBody());
+        System.out.println(Arrays.toString(message.getBody()));
         System.out.println(message.getMessageProperties());
         System.out.println(message.getClass());
     }
+
+
 }

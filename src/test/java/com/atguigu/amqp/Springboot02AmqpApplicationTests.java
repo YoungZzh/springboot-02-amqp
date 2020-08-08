@@ -1,6 +1,7 @@
 package com.atguigu.amqp;
 
 import com.atguigu.amqp.bean.Book;
+import com.atguigu.amqp.config.MyAMQPConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.core.AmqpAdmin;
@@ -21,8 +22,15 @@ class Springboot02AmqpApplicationTests {
     @Autowired
     RabbitTemplate rabbitTemplate;
 
+    //交换机，队列管理组件
     @Autowired
     AmqpAdmin amqpAdmin;
+
+
+    @Test
+    public void testSend(){
+        rabbitTemplate.convertAndSend(MyAMQPConfig.EXCHANGE_NAME,"boot.haha",new Book("活着","余少华"));
+    }
 
     @Test
     public void createExchange(){
